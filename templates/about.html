@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}About | RoverOS{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <h1>RoverOS: Differential Drive Kinematics Analysis</h1>
+    <p class="subtitle">A rigorous computational framework for mobile robot dynamics and position estimation.</p>
+
+    <div class="card">
+        <h3>Kinematics Foundation</h3>
+        <p>
+            RoverOS implements the complete differential drive kinematics model, which derives from first principles of rigid body motion in the plane (SE(2) transformation group).
+        </p>
+        
+        <p>
+            The robot's state vector S(t) = [x(t) y(t) θ(t) v(t) ω(t)]<sup>T</sup> evolves according to the kinematic equations:
+        </p>
+        
+        <p style="text-align:center; font-family:var(--font-mono); font-size:0.85rem; margin:1rem 0;">
+            dx/dt = v · cos(θ)<br>
+            dy/dt = v · sin(θ)<br>
+            dθ/dt = ω
+        </p>
+        
+        <p>
+            Where x,y represent Cartesian coordinates, θ is the orientation angle, v is linear velocity, and ω is angular velocity. The kinematic mapping employs a half-speed steering frame to account for the inherent nonlinearity inherent in differential drive systems.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Control Pipeline Architecture</h3>
+        <p>
+            The ROS-agnostic control architecture implements an asynchronous client-server paradigm using:
+        </p>
+        
+        <ul style="font-size:0.9rem; margin:0.75rem 0 0 1.25rem; line-height:1.5;">
+            <li>Flask-based WebSocket abstraction layer for HTTP communication</li>
+            <li>Vectorized numerical integration using explicit Euler method with variable time stepping</li>
+            <li>Bounded state propagation with collision detection and response algorithms</li>
+        </ul>
+        
+        <p>
+            The system operates at a fixed latency of approximately <em>16ms</em>, achieving real-time performance through pre-computed trigonometric optimizations.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Collision Avoidance Dynamics</h3>
+        <p>
+            Boundary constraint enforcement utilizes geometric collision detection in robot-centered coordinates, implemented via Hausdorff boundary checking for the rectangular environment:
+        </p>
+        
+        <p style="text-align:center; font-family:var(--font-mono); font-size:0.85rem; margin:1rem 0;">
+            if ‖r<sub>next</sub>‖ > ‖r<sub>bounds</sub>‖:<br>
+              r<sub>clamped</sub> = r<sub>bounds</sub> - |r<sub>bounds</sub> - r<sub>next</sub>|<br>
+              v = 0 (reflective dissipation)
+        </p>
+        
+        <p>
+            The collision response mechanism instantaneously attenuates linear momentum while preserving angular momentum components, ensuring conservation of angular momentum in impact scenarios.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Mathematical Precision Engineering</h3>
+        <div class="creator-profile">
+            <div class="creator-avatar">RD</div>
+            <div class="creator-details">
+                <h4>Reman Dey</h4>
+                <p>
+                    Developed with emphasis on numerical stability, vector-based formulations, and IEEE 754 floating-point precision compliance. The implementation serves as a minimalist experimental platform for differential robotics exploration, deliberately abstracted from complex ROS ecosystems to maintain modularity and educational clarity.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card text-center">
+        <a href="{{ url_for('index') }}" class="btn-primary">Launch Analysis Suite</a>
+    </div>
+</div>
+{% endblock %}

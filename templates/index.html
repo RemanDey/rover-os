@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Simulation | RoverOS{% endblock %}
+
+{% block content %}
+<div class="sim-wrapper">
+    <div class="sim-top-row">
+        <div class="sim-figure">
+            <div class="sim-figure-title">Figure 1: <span>Rover Simulation</span></div>
+            <canvas id="simCanvas" width="500" height="500"></canvas>
+        </div>
+
+        <div class="workspace-panel">
+            <div class="workspace-header">Workspace</div>
+            <table class="workspace-table">
+                <thead>
+                    <tr><th>Name</th><th>Value</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>x</td><td id="ws-x">250.00</td></tr>
+                    <tr><td>y</td><td id="ws-y">250.00</td></tr>
+                    <tr><td>theta</td><td id="ws-theta">0&deg;</td></tr>
+                    <tr><td>v</td><td id="ws-v">0</td></tr>
+                    <tr><td>omega</td><td id="ws-omega">0</td></tr>
+                    <tr><td>collision</td><td id="ws-collision">false</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="command-window">
+        <div class="command-header">Command Window</div>
+        <div class="command-content">
+            <div class="command-line">
+                <span class="command-prompt">>></span>
+                <span class="command-text" id="telemetry">x: 250.00 | y: 250.00 | heading: 0&deg; | v: 0 | omega: 0</span>
+            </div>
+            <div class="command-output" id="telemetry-status">Status: Idle</div>
+        </div>
+    </div>
+
+    <div class="control-legend">
+        <strong>Keyboard Controls:</strong>
+        <kbd>&#9650;</kbd> <kbd>&#9660;</kbd> <kbd>&#9668;</kbd> <kbd>&#9658;</kbd> or
+        <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> to drive &nbsp;|&nbsp;
+        <kbd>Spacebar</kbd> Emergency Stop
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

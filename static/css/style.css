@@ -1,0 +1,391 @@
+:root {
+    --matlab-bg: #eef0f2;
+    --matlab-panel: #ffffff;
+    --matlab-toolstrip: #f5f5f5;
+    --matlab-border: #d9dde3;
+    --matlab-border-dark: #b0b8c4;
+    --matlab-orange: #e67e22;
+    --matlab-orange-hover: #d35400;
+    --matlab-blue: #0072BD;
+    --matlab-red: #D95319;
+    --matlab-green: #77AC30;
+    --matlab-text: #2c3e50;
+    --matlab-text-secondary: #5e6c84;
+    --matlab-text-muted: #8c9aa8;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-mono: 'Consolas', 'Lucida Console', 'Courier New', monospace;
+    --shadow-panel: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-ui);
+    background-color: var(--matlab-bg);
+    color: var(--matlab-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.navbar {
+    background: var(--matlab-panel);
+    border-bottom: 1px solid var(--matlab-border);
+    box-shadow: var(--shadow-panel);
+    position: relative;
+}
+
+.navbar::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, var(--matlab-orange), var(--matlab-orange-hover));
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.brand {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--matlab-text);
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--matlab-orange), var(--matlab-orange-hover));
+    border-radius: 3px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 4px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: var(--matlab-text-secondary);
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 3px;
+    font-size: 0.85rem;
+    transition: background 0.15s, color 0.15s;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    background: var(--matlab-bg);
+    color: var(--matlab-text);
+}
+
+.nav-links a.active {
+    color: var(--matlab-orange);
+    background: rgba(230, 126, 34, 0.08);
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+.sim-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.sim-top-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.sim-figure {
+    flex: 1;
+    background: var(--matlab-panel);
+    border: 1px solid var(--matlab-border);
+    border-radius: 4px;
+    box-shadow: var(--shadow-panel);
+    padding: 12px;
+}
+
+.sim-figure-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--matlab-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--matlab-border);
+}
+
+.sim-figure-title span {
+    color: var(--matlab-text-muted);
+    font-weight: 400;
+}
+
+.sim-figure canvas {
+    display: block;
+    background: #ffffff;
+    border: 1px solid var(--matlab-border-dark);
+    border-radius: 2px;
+    margin: 0 auto;
+}
+
+.workspace-panel {
+    width: 220px;
+    flex-shrink: 0;
+    background: var(--matlab-panel);
+    border: 1px solid var(--matlab-border);
+    border-radius: 4px;
+    box-shadow: var(--shadow-panel);
+}
+
+.workspace-header {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--matlab-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 12px 8px;
+    border-bottom: 1px solid var(--matlab-border);
+    background: var(--matlab-toolstrip);
+    border-radius: 4px 4px 0 0;
+}
+
+.workspace-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+.workspace-table th {
+    text-align: left;
+    padding: 5px 10px;
+    font-weight: 600;
+    color: var(--matlab-text-secondary);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid var(--matlab-border);
+    background: var(--matlab-bg);
+}
+
+.workspace-table td {
+    padding: 3px 10px;
+    border-bottom: 1px solid var(--matlab-border);
+    color: var(--matlab-text-secondary);
+}
+
+.workspace-table td:first-child {
+    color: var(--matlab-text);
+    font-weight: 500;
+}
+
+.workspace-table td:last-child {
+    text-align: right;
+    color: var(--matlab-blue);
+    font-weight: 600;
+}
+
+.command-window {
+    background: #1e1e1e;
+    border: 1px solid var(--matlab-border);
+    border-radius: 4px;
+    box-shadow: var(--shadow-panel);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    overflow: hidden;
+}
+
+.command-header {
+    background: #2d2d2d;
+    padding: 6px 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.command-content {
+    padding: 10px 14px;
+    min-height: 36px;
+}
+
+.command-line {
+    color: #e0e0e0;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.command-prompt {
+    color: #5cb85c;
+    font-weight: bold;
+    user-select: none;
+}
+
+.command-text {
+    color: #d4d4d4;
+}
+
+.command-output {
+    color: #569cd6;
+    margin-top: 2px;
+    padding-left: 20px;
+}
+
+.control-legend {
+    font-size: 0.8rem;
+    color: var(--matlab-text-secondary);
+    line-height: 1.5;
+}
+
+.control-legend strong {
+    color: var(--matlab-text);
+}
+
+kbd {
+    background: #f0f0f0;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid #c0c0c0;
+    border-bottom: 2px solid #a0a0a0;
+    font-size: 0.75rem;
+    font-family: var(--font-ui);
+    color: var(--matlab-text);
+}
+
+.about-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+.about-container h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--matlab-text);
+    margin: 0 0 0.25rem 0;
+}
+
+.subtitle {
+    color: var(--matlab-text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.card {
+    background: var(--matlab-panel);
+    border: 1px solid var(--matlab-border);
+    border-radius: 4px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-panel);
+}
+
+.card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: var(--matlab-text);
+}
+
+.card p {
+    color: var(--matlab-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.creator-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+}
+
+.creator-avatar {
+    background: linear-gradient(135deg, var(--matlab-orange), var(--matlab-orange-hover));
+    font-size: 1.5rem;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    font-weight: 700;
+}
+
+.creator-details h4 {
+    margin: 0 0 0.35rem 0;
+    color: var(--matlab-text);
+    font-size: 0.95rem;
+}
+
+.creator-details p {
+    font-size: 0.85rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--matlab-orange);
+    color: white;
+    padding: 0.6rem 2rem;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.15s;
+}
+
+.btn-primary:hover {
+    background: var(--matlab-orange-hover);
+}
+
+.footer {
+    background: var(--matlab-panel);
+    text-align: center;
+    padding: 0.6rem;
+    font-size: 0.75rem;
+    color: var(--matlab-text-muted);
+    border-top: 1px solid var(--matlab-border);
+}
